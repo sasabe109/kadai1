@@ -1,0 +1,11 @@
+<p><font size="7"> イベントを開催する</font></p>
+<br> 
+<p>イベントタイトル<p>
+<input type= name="title" >
+<p>イベントタイプ<p>
+<%= form_with(model:event, local: true) do |form| %>
+    <%= form.radio_button :Event_type, :true %>
+    <%= form.label :Event_type, "日付指定型", {value: :true, style: "display: inline-block;"} %>
+    <%= form.radio_button :Event_type, :false %>
+    <%= form.label :Event_type, "日程調整型", {value: :false, style: "display: inline-block;"} %>
+  <% end %>
