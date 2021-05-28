@@ -5,8 +5,12 @@ Rails.application.routes.draw do
 
   get 'home/top' , to: 'home#top'
 
+
   get 'make_event' , to: 'eventpage#make_event'
   get 'event_list' , to: 'eventpage#event_list'
   get 'schedule'  ,  to: 'eventpage#schedule'
+  post 'event_create' , to: 'eventpage#event_create'
+  get 'show_event/:id' , to: 'eventpage#show_event'
+
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,9 @@
+<% event1=events.all%>
+
+   <% event1.each do |e| %>
+      <div class="events_Title_index">
+         <%= link_to("#{e.name}","/show_event/#{e.id}") %>
+      </div>
+    <% end %>
+
+   
