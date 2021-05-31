@@ -20,9 +20,19 @@ class EventpageController < ApplicationController
     end
 
     def schedule 
+    end
 
+    def show_event
+       @event=Event.find_by(id:params[:id])
+    end
+
+    def edit_event
+        @event=Event.find_by(id:params[:id])
+    end
+
+    def recreate                          #修正
+        
     end
     
     
-
 end

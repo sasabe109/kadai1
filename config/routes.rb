@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'schedule'  ,  to: 'eventpage#schedule'
   post 'create' , to: 'eventpage#create'
   get 'show_event/:id' , to: 'eventpage#show_event'
-
+  get 'edit_event/:id', to: 'eventpage#edit_event'
+  post 'recreate', to: 'eventpage#recreate'
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

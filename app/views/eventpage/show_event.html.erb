@@ -1,0 +1,19 @@
+<p><font size="7"> ★<%= @event.title %>★ </font></p>
+
+<div>
+<P><font size="5">企画内容:</font><P>
+<%= @event.content %>
+</div>
+<div>
+<P><font size="5">開催日時:</font><P>
+<%= @event.date %>
+</div>
+<div>
+<P><font size="5">出席メンバーリスト:</font><P>
+<p> これから </p>
+</div>
+<br><br>
+
+<div>
+<%= link_to("編集","/edit_event/#{@event.id}") %>  
+</div>

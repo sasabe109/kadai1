@@ -1,0 +1,12 @@
+<p><font size="7"> イベント内容を修正する</font></p>
+<%= form_tag("/recreate") do %>   
+    <p>イベントタイトル<p>
+    <input type="text" name="title">  
+    <p>イベントの内容<p>
+    <textarea name="content"><%=@event.content%></textarea>
+    <p>イベント日時を選択（日程調整する場合は選択しないこと)<p>
+    <%= datetime_field_tag :date %>
+    <br>
+    <br>
+    <input type="submit" value="修正する">
+    <% end %>
