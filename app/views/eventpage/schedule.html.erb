@@ -1,9 +1,8 @@
-<% event1=events.all%>
-
+<% event1=Event.all %>
+<p><font size="7"> イベントスケジュール</font></p>
    <% event1.each do |e| %>
-      <div class="events_Title_index">
-         <%= link_to("#{e.name}","/show_event/#{e.id}") %>
-      </div>
+      
+       <%= link_to("#{e.title}","/show_event/#{e.id}") %>
+      
     <% end %>
-
    

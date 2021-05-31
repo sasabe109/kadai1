@@ -1,26 +1,17 @@
 <p><font size="7"> イベントを開催する</font></p>
 <br> 
 
-<% form_tag("/event_create") do %>
+<%= form_tag("/create") do %>
 <p>イベントタイトル<p>
-<input type= name="name" >
+<input type="text" name="title">  
 <p>イベントの内容<p>
 <textarea name="content"></textarea>
+<p>イベント日時を選択（日程調整する場合は選択しないこと)<p>
+<%= datetime_field_tag :date %>
+<br>
+<br>
+<input type="submit" value="開催する">
 <% end %>
 
-<p>イベントタイプ<p>
-<%= form_with(model:@event, local: true) do |form| %>
-  <%= form.radio_button :Event_type, :true %>
-  <%= form.label :Event_type, "日付指定型", {value: :true, style: "display: inline-block;"} %>　　     <!-- Event_typeをparamsに送信 -->
-  <%= form.radio_button :Event_type, :false %>
-  <%= form.label :Event_type, "日程調整型", {value: :false, style: "display: inline-block;"} %>
-<% end %>
 
-<p>イベント日時を選択<p>
-<%= form_for(@event,url: {controller: 'eventpages', action: 'create' }) do |f| %>
-  <%= f.date_select :Event_date, {}, class: 'form-control' %>
-  <%= f.label :Event_Date, class: 'control-label' %>
-  <%= f.time_select :Event_Date, class: 'form-control' %>
-  <%= f.submit %>
-<% end %>
 
