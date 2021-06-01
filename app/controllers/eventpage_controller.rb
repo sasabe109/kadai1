@@ -1,6 +1,5 @@
 class EventpageController < ApplicationController
     def make_event
-        
     end
 
     def create
@@ -30,8 +29,13 @@ class EventpageController < ApplicationController
         @event=Event.find_by(id:params[:id])
     end
 
-    def recreate                          #修正
-        
+    def update                          #修正
+        @event=Event.find_by(id: params[:id])
+        @event.title=params[:title]
+        @event.content=params[:content]
+        @event.date=params[:date]
+        @event.save               #日付指定型のイベントな
+        redirect_to("/schedule")
     end
     
     
