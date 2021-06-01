@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   get 'show_event/:id' , to: 'eventpage#show_event'
   get 'edit_event/:id', to: 'eventpage#edit_event'
   post 'update/:id', to: 'eventpage#update'
+  get 'destroy/:id', to: 'eventpage#destroy'
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -38,5 +38,9 @@ class EventpageController < ApplicationController
         redirect_to("/schedule")
     end
     
-    
+    def destroy
+        @event=Event.find_by(id: params[:id])
+        @event.destroy
+        redirect_to("/schedule")
+    end
 end

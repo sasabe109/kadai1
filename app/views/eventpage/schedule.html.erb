@@ -2,7 +2,11 @@
 <p><font size="7"> イベントスケジュール</font></p>
    <% event1.each do |e| %>
       
-       <%= link_to("#{e.title}","/show_event/#{e.id}") %>  
-      
+       <%= link_to("#{e.title}   +++++開催日時:#{e.date}","/show_event/#{e.id}") %>  
+      <br>
     <% end %>
-   
+
+    <br>
+    <%=link_to("home/top") do %>
+      <button class="btn btn-secondary btn-lg" >topに戻る</button>
+    <%end%>
