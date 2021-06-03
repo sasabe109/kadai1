@@ -7,9 +7,6 @@
 <br>  <br>
 <%= link_to("イベントスケジュール","/schedule") %>
 <br>  <br>
-<%= link_to("新規登録はこちらから","/users/sign_up") %>
-<br>  <br>
-<%= link_to("ログインはこちらから","/users/sign_in") %>
-<br>  <br>
+<% if user_signed_in? %>
 <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
-
+<% end %>

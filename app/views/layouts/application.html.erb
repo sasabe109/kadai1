@@ -13,6 +13,12 @@
     <% if user_signed_in? %>      
     <% message="こんにちは#{current_user.name}さん。イベントの開催・参加・確認をしよう!" %>
     <%= "................."+message %>
+    <% else %>
+    <% message2="ログインしてイベントの開催・参加・確認をしよう!" %>
+    <%= "................."+message2 %>
+    <%= link_to("ログインはこちらから","/users/sign_in") %>
+    &ensp;                                                       <!--　&ensp は空白スペース　-->
+    <%= link_to("新規登録はこちらから","/users/sign_up") %>
     <% end %>
 
   </head>

@@ -1,4 +1,6 @@
 class EventpageController < ApplicationController
+    before_action :authenticate_user!        #アクセス制限レベル１  ログイン画面へリダイレクト
+
     def make_event
     end
 
@@ -7,6 +9,7 @@ class EventpageController < ApplicationController
         @event.title=params[:title]
         @event.content=params[:content]
         @event.date=params[:date]
+        @event.presenter_id=current_user.id
         @event.save
         if @event.date                   #日付指定型のイベントならば
             redirect_to("/schedule")
@@ -23,6 +26,8 @@ class EventpageController < ApplicationController
 
     def show_event
        @event=Event.find_by(id:params[:id])
+       num=@event.presenter_id
+       @user=User.find_by(id:num)
     end
 
     def edit_event
@@ -34,8 +39,8 @@ class EventpageController < ApplicationController
         @event.title=params[:title]
         @event.content=params[:content]
         @event.date=params[:date]
-        @event.save               #日付指定型のイベントな
-        redirect_to("/schedule")
+        @event.save               
+        redirect_to("/schedule")   #日付指定型のイベントな
     end
     
     def destroy

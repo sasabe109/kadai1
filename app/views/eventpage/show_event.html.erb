@@ -1,6 +1,10 @@
 <p><font size="7"> ★<%= @event.title %>★ </font></p>
 
 <div>
+<P><font size="5">企画者:</font><P>
+<% message="present by" %>
+<%= @user.name %>
+
 <P><font size="5">企画内容:</font><P>
 <%= @event.content %>
 </div>
@@ -15,6 +19,9 @@
 <br><br>
 
 <div>
+<!--　イベント開催者のみ可能なコマンド　-->
+<% if @event.presenter_id == current_user.id %>
 <%= link_to("編集","/edit_event/#{@event.id}") %>  
 <%= link_to("削除","/destroy/#{@event.id}") %>
+<% end %>
 </div>
