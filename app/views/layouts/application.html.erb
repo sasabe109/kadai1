@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kadai</title>
+    <title>Rex</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!--　ログイン認証後なら　-->
+    <% if user_signed_in? %>      
+    <% message="こんにちは#{current_user.name}さん。イベントの開催・参加・確認をしよう!" %>
+    <%= "................."+message %>
+    <% end %>
+
   </head>
 
   <body>
