@@ -28,6 +28,7 @@ class EventpageController < ApplicationController
        @event=Event.find_by(id:params[:id])
        num=@event.presenter_id
        @user=User.find_by(id:num)
+       @join=Join.find_by(user_id: current_user.id , event_id: params[:id]) #追加部分
     end
 
     def edit_event
@@ -47,5 +48,25 @@ class EventpageController < ApplicationController
         @event=Event.find_by(id: params[:id])
         @event.destroy
         redirect_to("/schedule")
+    end
+
+    def join
+        join=Join.new(user_id: current_user.id)
+        join.event_id=params[:id]
+        join.save
+        redirect_to("/schedule")  #後に変更の可能性あり
+    end
+
+    def exit
+        join=Join.find_by(user_id: current_user.id , event_id:params[:id])
+        join.destroy
+        redirect_to("/schedule")
+    end
+
+    def memberlist
+        joins=Join.where(event_id: params[:id])
+        joins.each do |j|
+            @memberlists=User.where(id:j.user_id)
+        end
     end
 end

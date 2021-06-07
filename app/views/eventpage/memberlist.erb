@@ -1,0 +1,8 @@
+<p><font size="7"> イベントメンバー</font></p>
+<% if @memberlists %>
+    <% @memberlists.each do |m| %>
+        <%= m.name %>
+    <% end %>
+<% else %>
+    まだ参加者はいません
+<% end %>

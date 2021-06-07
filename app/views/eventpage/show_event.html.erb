@@ -14,14 +14,22 @@
 </div>
 <div>
 <P><font size="5">出席メンバーリスト:</font><P>
-<p> これから </p>
+<%= link_to("イベント参加者","/event_member/#{@event.id}") %>
 </div>
-<br><br>
-
+<br>
+<div>
+<% if @join %>
+<%= button_to("このイベントを脱退","/exit_event/#{@event.id}") %>
+<% else %>
+<%= button_to("このイベントに参加","/join_event/#{@event.id}") %>
+<% end %>
+</div>
+<br>
 <div>
 <!--　イベント開催者のみ可能なコマンド　-->
 <% if @event.presenter_id == current_user.id %>
-<%= link_to("編集","/edit_event/#{@event.id}") %>  
-<%= link_to("削除","/destroy/#{@event.id}") %>
+<%= link_to("イベント内容の編集","/edit_event/#{@event.id}") %>  
+&ensp; 
+<%= link_to("イベントの削除","/destroy/#{@event.id}") %>
 <% end %>
 </div>
