@@ -65,8 +65,17 @@ class EventpageController < ApplicationController
 
     def memberlist
         joins=Join.where(event_id: params[:id])
-        joins.each do |j|
-            @memberlists=User.where(id:j.user_id)
+        @memberlists=[],i=0
+        if joins.size>=2
+                joins.each do |j|
+                    @memberlists[i]=Event.find_by(id:j.user_id)
+                    i+=1
+                end
+        elsif joins.size==1
+            join=Join.find_by(event_id: params[:id])
+            @memberlists=User.find_by(id:join.user_id)
+        else
+            @memberlists="まだ参加者はいません"
         end
     end
 

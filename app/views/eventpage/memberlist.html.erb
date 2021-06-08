@@ -1,8 +1,12 @@
 <p><font size="7"> イベントメンバー</font></p>
-<% if @memberlists %>
+<% if @memberlists.instance_of?(Array) %>
     <% @memberlists.each do |m| %>
         <%= m.name %>
     <% end %>
+<% elsif @memberlists.instance_of?(String) %>
+    <%= @memberlists %>
 <% else %>
-    まだ参加者はいません
+    <%= @memberlists.name %>
 <% end %>
+
+    
