@@ -1,0 +1,11 @@
+<p><font size="7"> 自分が参加中のイベント</font></p>
+<% if @myevents.instance_of?(Array) %>
+    <% @myevents.each do |m| %>
+        <%= link_to("#{m[:title]}   +++++開催日時:#{m[:date]}","/show_event/#{m[:id]}") %>  
+        <br>
+    <% end %>
+<% elsif @myevents.instance_of?(String) %>
+    <%= @myevents %>
+<% else %>
+    <%= link_to("#{@myevents[:title]}   +++++開催日時:#{@myevents[:date]}","/show_event/#{@myevents[:id]}") %>
+<% end %>  
