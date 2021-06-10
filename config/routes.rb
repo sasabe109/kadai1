@@ -23,5 +23,7 @@ Rails.application.routes.draw do
   post 'join_event/:id' , to: 'eventpage#join'
   get 'event_member/:id' , to: 'eventpage#memberlist'
   get 'myevent' , to: 'eventpage#myevent'
+  post 'close_event/:id' , to: 'eventpage#close'
+
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,5 +1,6 @@
-<p><font size="7"> ★<%= @event.title %>★ </font></p>
+<% require "date" %>
 
+<p><font size="7"> ★<%= @event.title %>★ </font></p>
 <div>
 <P><font size="5">企画者:</font><P>
 <% message="present by" %>
@@ -8,28 +9,39 @@
 <P><font size="5">企画内容:</font><P>
 <%= @event.content %>
 </div>
+
 <div>
 <P><font size="5">開催日時:</font><P>
-<%= @event.date %>
+<% if @event.flag.nil? %>            <!--　イベントが終了していなければ表示　-->
+   <%= @event.date %>
+<% else %>
+    このイベントは終了しました
+<% end %>
 </div>
+
 <div>
 <P><font size="5">出席メンバーリスト:</font><P>
 <%= link_to("イベント参加者","/event_member/#{@event.id}") %>
 </div>
 <br>
 <div>
-<% if @join %>
-<%= button_to("このイベントを脱退","/exit_event/#{@event.id}") %>
-<% else %>
-<%= button_to("このイベントに参加","/join_event/#{@event.id}") %>
+<% if @event.flag.nil? %>           <!--　イベントが終了していなければ表示　-->
+    <% if @join %>
+        <%= button_to("このイベントを脱退","/exit_event/#{@event.id}") %>
+    <% else %>
+        <%= button_to("このイベントに参加","/join_event/#{@event.id}") %>
+    <% end %>
 <% end %>
 </div>
 <br>
+
 <div>
 <!--　イベント開催者のみ可能なコマンド　-->
-<% if @event.presenter_id == current_user.id %>
+<% if @event.presenter_id == current_user.id && @event.flag.nil? %>
 <%= link_to("イベント内容の編集","/edit_event/#{@event.id}") %>  
 &ensp; 
 <%= link_to("イベントの削除","/destroy/#{@event.id}") %>
+<br><br>
+<%= button_to("このイベントを終了する","/close_event/#{@event.id}") %>
 <% end %>
 </div>

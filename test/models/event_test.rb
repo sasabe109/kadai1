@@ -5,6 +5,7 @@
 #  id           :integer          not null, primary key
 #  content      :text
 #  date         :datetime
+#  flag         :integer
 #  title        :string
 #  type         :boolean
 #  created_at   :datetime         not null

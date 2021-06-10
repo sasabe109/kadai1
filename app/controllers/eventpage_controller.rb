@@ -96,4 +96,11 @@ class EventpageController < ApplicationController
         end
     
     end
+
+    def close
+        @event=Event.find_by(id:params[:id])
+        @event.flag="1"
+        @event.save
+        redirect_to("/schedule")
+    end
 end
