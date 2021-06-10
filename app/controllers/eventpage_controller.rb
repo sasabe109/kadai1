@@ -46,6 +46,7 @@ class EventpageController < ApplicationController
     
     def destroy
         @event=Event.find_by(id: params[:id])
+        Join.destroy_by(event_id:params[:id]) #削除前に全員脱退させる
         @event.destroy
         redirect_to("/schedule")
     end
