@@ -59,3 +59,5 @@ gem 'devise'
 
 gem 'annotate'
 
+gem 'simple_calendar', '~>2.0'
+

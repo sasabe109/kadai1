@@ -1,11 +1,38 @@
 <% event1=Event.all %>
 <p><font size="7"> イベントスケジュール</font></p>
-   <% event1.each do |e| %>
-      
-       <%= link_to("#{e.title}   +++++開催日時:#{e.date}","/show_event/#{e.id}") %>  
-      <br>
+<p><font size="4"> 日程調整を要するイベント一覧 </font><P>
+    <% event1.each do |e| %>
+       <% if e.date.nil? %>
+          <%= link_to("#{e.title}","/show_event/#{e.id}") %>  
+          <br>
+       <% end %>
     <% end %>
+    <br>
 
+    <div class= 'calender'>
+      <%= month_calendar events: event1 do |date, event| %>
+           <%= date.day %>
+           <% event.each do |event| %>
+               <% if event.flag.nil? %>
+                   <% join=Join.find_by(user_id:current_user.id , event_id:event.id) %>
+                   <% if join %>
+                       <span class="join_event">
+                           <%= link_to("#{event.title}","/show_event/#{event.id}") %>   
+                      </span>
+                   <% else %>
+                       <span class="absent_event">
+                            <%= link_to("#{event.title}","/show_event/#{event.id}") %>
+                      </span>
+                   <% end %>
+               <% else %>
+                   <span class="closed_event">
+                       <%= link_to("#{event.title}","/show_event/#{event.id}") %>
+                   </span>
+               <% end %>
+               <br>
+           <% end %>
+      <% end %>
+</div>
     <br>
     <%=link_to("home/top") do %>
       <button class="btn btn-secondary btn-lg" >topに戻る</button>
