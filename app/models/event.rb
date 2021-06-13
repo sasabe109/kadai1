@@ -13,4 +13,9 @@
 #  presenter_id :integer
 #
 class Event < ApplicationRecord
+
+    def start_time
+        self.date
+    end
+    
 end

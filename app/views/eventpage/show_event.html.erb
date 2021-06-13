@@ -13,7 +13,11 @@
 <div>
 <P><font size="5">開催日時:</font><P>
 <% if @event.flag.nil? %>            <!--　イベントが終了していなければ表示　-->
-   <%= @event.date %>
+    <% if @event.date %>
+       <%= @event.date.strftime("%Y年 %m月%d日 %H時%M分") %>
+    <% else %>
+       <%= link_to("日程調整を行う","/planning/result/#{@event.id}") %>
+    <% end %>
 <% else %>
     このイベントは終了しました
 <% end %>
@@ -25,7 +29,7 @@
 </div>
 <br>
 <div>
-<% if @event.flag.nil? %>           <!--　イベントが終了していなければ表示　-->
+<% if @event.flag.nil? && @event.date %>           <!--　イベントが終了していなければ表示　-->
     <% if @join %>
         <%= button_to("このイベントを脱退","/exit_event/#{@event.id}") %>
     <% else %>

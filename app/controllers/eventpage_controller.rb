@@ -103,4 +103,53 @@ class EventpageController < ApplicationController
         @event.save
         redirect_to("/schedule")
     end
+
+    def result
+        @event=Event.find_by(id:params[:id])
+        start_day=@event.created_at 
+        start_day=start_day.to_datetime
+        end_day = start_day + 30.day
+        @select_date=(start_day..end_day).to_a   #　datetime型の配列を定義
+        @get_counts = Count.where(event_id:params[:id])   #指定のイベントに対するカウントテーブルの有無を確認
+        if @get_counts.empty?                              #無ければ、そのイベントに対する集計テーブルを新作成し全て0を代入
+            for i in 0..30 do
+                @get_count=Count.new(event_id:params[:id] , datenum:i , user_count:0)
+                @get_count.save
+            end
+            @get_counts=Count.where(event_id:params[:id])
+        end
+        @get_plans=Planning.where(event_id:params[:id],user_id:current_user.id)
+    end
+
+    def match_day
+        @event=Event.find_by(id:params[:id])
+        start_day=@event.created_at 
+        start_day=start_day.to_datetime
+        end_day = start_day + 30.day
+        @select_date=(start_day..end_day).to_a   #　datetime型の配列を定義
+    end
+
+    def decide_date
+        user_key=current_user.id , event_key=params[:id]
+
+        i=0
+        #各dateに対するstatusをセットでPlanningテーブルに受け渡し用の配列.each doで格納
+        params[:datelist].each do | di1,di2 |
+            @get_plan=Planning.new(user_id:user_key , event_id:event_key ,datenum:i , strdate:di1 ,status:di2)
+            @get_plan.save                 #最後の２項で一意的なレコードが生成される
+            i +=1
+        end
+
+        @counts=Count.where(event_id:event_key)
+        j=0
+        params[:datelist].each do | di1,di2 |
+            if di2==1
+                @counts[j].user_count += 1
+                @counts[j].save
+            end
+        j += 1
+        end
+        redirect_to("/planning/result")
+    end
+
 end

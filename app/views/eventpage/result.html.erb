@@ -1,0 +1,22 @@
+<p><font size="7"> ★<%= @event.title %>★ </font></p>
+<P><font size="5">企画内容</font></P>
+<%= @event.content %>
+<p>◆日程状況◆</p>
+<% j=0 %> 
+<% @select_date.each do |date| %>
+   <%= date.strftime("%-m/%d") %>
+   ........
+   <%= @get_counts[j].user_count %>
+   票
+   <br>
+   <% j+=1 %>
+<% end %>
+<% if @get_plans.empty? %>
+    <%= link_to("自分も回答する","/match_day/#{@event.id}") %>
+<% else %>
+    <%= link_to("回答を修正する","/match_day/#{@event.id}") %>
+<% end %>
+<br><br>
+<% if @event.presenter_id == current_user.id %>
+    <%= button_to("日程調整を締め切る","/close_match_day/#{@event.id}") %>
+<% end %> 

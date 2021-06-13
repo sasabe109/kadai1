@@ -1,6 +1,6 @@
 <% event1=Event.all %>
 <p><font size="7"> イベントスケジュール</font></p>
-<p><font size="4"> 日程調整を要するイベント一覧 </font><P>
+<p><font size="4"> ◆◇日程調整を要するイベント一覧◆◇ </font><P>
     <% event1.each do |e| %>
        <% if e.date.nil? %>
           <%= link_to("#{e.title}","/show_event/#{e.id}") %>  
@@ -33,7 +33,7 @@
            <% end %>
       <% end %>
 </div>
-    <br>
-    <%=link_to("home/top") do %>
-      <button class="btn btn-secondary btn-lg" >topに戻る</button>
+    <br>　&ensp;
+    <%=link_to("/make_event") do %>
+      <button class="btn btn-secondary btn-lg" >イベント新規作成</button>
     <%end%>

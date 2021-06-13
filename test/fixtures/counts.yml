@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: counts
+#
+#  id         :integer          not null, primary key
+#  datenum    :integer
+#  user_count :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  event_id   :integer
+#
+
+one:
+  event_id: 1
+  datenum: 1
+  user_count: 1
+
+two:
+  event_id: 1
+  datenum: 1
+  user_count: 1
