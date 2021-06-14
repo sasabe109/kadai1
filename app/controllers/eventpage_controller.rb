@@ -11,11 +11,7 @@ class EventpageController < ApplicationController
         @event.date=params[:date]
         @event.presenter_id=current_user.id
         @event.save
-        if @event.date                   #日付指定型のイベントならば
-            redirect_to("/schedule")
-        else                             #日程調整型
-            redirect_to("/event_list")
-        end
+        redirect_to("/schedule")
     end
 
     def event_list            
@@ -127,29 +123,76 @@ class EventpageController < ApplicationController
         start_day=start_day.to_datetime
         end_day = start_day + 30.day
         @select_date=(start_day..end_day).to_a   #　datetime型の配列を定義
+        @get_plan=Planning.where(event_id:params[:id] , user_id:current_user.id)
     end
 
     def decide_date
-        user_key=current_user.id , event_key=params[:id]
+        user_key=current_user.id 
+        event_key=params[:id]
 
         i=0
         #各dateに対するstatusをセットでPlanningテーブルに受け渡し用の配列.each doで格納
         params[:datelist].each do | di1,di2 |
-            @get_plan=Planning.new(user_id:user_key , event_id:event_key ,datenum:i , strdate:di1 ,status:di2)
-            @get_plan.save                 #最後の２項で一意的なレコードが生成される
-            i +=1
-        end
+            @get_plan=Planning.new(user_id:user_key)
+            @get_plan.event_id=event_key
+            @get_plan.datenum=i
+            @get_plan.strdate=di1 
+            @get_plan.status=di2 
+            @get_plan.save            #最後の２項で一意的なレコードが生成される
+            i +=1 
+        end 
 
-        @counts=Count.where(event_id:event_key)
         j=0
         params[:datelist].each do | di1,di2 |
-            if di2==1
-                @counts[j].user_count += 1
-                @counts[j].save
+            plan=Planning.find_by(event_id:event_key,datenum:j)
+            if plan.status==1
+                @count=Count.find_by(event_id:event_key , datenum:j)
+                @count.user_count += 1
+                @count.save
             end
-        j += 1
+            j += 1
         end
-        redirect_to("/planning/result")
+        redirect_to("/planning/result/#{params[:id]}")
     end
+
+
+    def re_decide_date
+
+        #チェックボックスの各statusとカウントテーブルの加算・非加算状態を初期化する
+        user_plan=Planning.where(event_id:params[:id],user_id:current_user.id)
+        count=Count.where(event_id:params[:id])
+        m=0
+        user_plan.each do |plan|
+            if(plan.status==1)
+                plan.status=0
+                plan.save
+                count[m].user_count -=1
+                count[m].save
+            end
+            m +=1
+        end
+
+        i=0
+        #各dateに対するstatusをセットでPlanningテーブルに受け渡し用の配列.each doで再設定
+        params[:datelist].each do | di1,di2 |
+            @get_plan=Planning.find_by(event_id:params[:id] , user_id:current_user.id ,datenum:i)
+            @get_plan.status=di2 
+            @get_plan.save            #最後の２項で一意的なレコードが生成される
+            i +=1 
+        end 
+
+        j=0
+        params[:datelist].each do | di1,di2 |
+            plan=Planning.find_by(event_id:params[:id],datenum:j)
+            if plan.status==1
+                @count=Count.find_by(event_id:params[:id] , datenum:j)
+                @count.user_count += 1
+                @count.save
+            end
+            j += 1
+        end
+        redirect_to("/planning/result/#{params[:id]}")
+
+    end 
 
 end

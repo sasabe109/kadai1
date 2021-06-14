@@ -2,21 +2,43 @@
 <p>イベントタイトル</p>　<%= @event.title %>
 <P>可能な日全てにチェック✓を入れてください</P>
 
-<% k=0 %>
-<%= form_tag("/decide_date/#{@event.id}") do %>
-    <% @select_date.each do |date| %>
-        <% if k<15 %>
-            <%= check_box "datelist","#{date}" %> 
-            <%= date.strftime("%-m月%d日") %>
-            <br>
-        <% else %>
-            <div class="datelist2">
-                 <%= check_box "datelist","#{date}" %> 
-                 <%= date.strftime("%-m月%d日") %>
-            </div>
+
+<% if @get_plan.empty? %> 
+　　<% k=0 %>
+　　<%= form_tag("/decide_date/#{@event.id}") do %>
+        <% @select_date.each do |date| %>
+            <% if k<15 %>
+                <%= check_box "datelist","#{date}" %> 
+                <%= date.strftime("%-m月%d日") %>
+                <br>
+            <% else %>
+                <div class="datelist2">
+                    <%= check_box "datelist","#{date}" %> 
+                    <%= date.strftime("%-m月%d日") %>
+                </div>
+            <% end %>
+            <% k += 1%>
         <% end %>
-        <% k += 1%>
-    <% end %>
-    <br>
-    <input type="submit" value="この日程で希望する">
+        <br>
+        <input type="submit" value="この日程で希望する">
+　　<% end %>
+<% else %>
+    <% k=0 %>
+    <%= form_tag("/re_decide_date/#{@event.id}") do %>
+        <% @select_date.each do |date| %>
+            <% if k<15 %>
+                <%= check_box "datelist","#{date}" %> 
+                <%= date.strftime("%-m月%d日") %>
+                <br>
+            <% else %>
+                <div class="datelist2">
+                    <%= check_box "datelist","#{date}" %> 
+                    <%= date.strftime("%-m月%d日") %>
+                </div>
+            <% end %>
+            <% k += 1%>
+        <% end %>
+        <br>
+        <input type="submit" value="この日程に修正する">
+　　<% end %>
 <% end %>

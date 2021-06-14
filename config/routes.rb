@@ -25,7 +25,8 @@ Rails.application.routes.draw do
   get 'myevent' , to: 'eventpage#myevent'
   post 'close_event/:id' , to: 'eventpage#close'
   get 'match_day/:id' , to: 'eventpage#match_day'
-  post 'decide_day/:id' , to: 'eventpage#decide_day'
+  post 'decide_date/:id' , to: 'eventpage#decide_date'
+  post 're_decide_date/:id' , to: 'eventpage#re_decide_date'
   get 'planning/result/:id' , to: 'eventpage#result'
 
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

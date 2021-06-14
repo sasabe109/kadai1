@@ -2,11 +2,13 @@
 
 
 <%= form_tag("/create") do %>
-<p>イベントタイトル<p>
+<p><font size="5">・イベントタイトル</font></p>
 <input type="text" name="title">  
-<p>イベントの内容<p>
+<p><font size="5">・イベントの内容</font></p>
+※イベントの規約事項や日程調整を設ける場合の日数の範囲など、詳細に入力すること。<br>
+（枠の右下にカーソルを合わせると自由に広げることができます）<br>
 <textarea name="content"></textarea>
-<p>イベント日時を選択（日程調整する場合は選択しないこと)<p>
+<p>・イベント日時を選択（※日程調整する場合は選択しないこと)</p>
 <%= datetime_field_tag :date %>
 <br>
 <br>
