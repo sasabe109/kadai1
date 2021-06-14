@@ -2,7 +2,7 @@
 <% if @myevents.instance_of?(Array) %>
     <% @myevents.each do |m| %>
         <% if m.flag.nil? %>  
-            <%= link_to("#{m[:title]}   +++++開催日時:#{m[:date]}","/show_event/#{m[:id]}") %>  
+            <%= link_to("#{m[:title]}","/show_event/#{m[:id]}") %>  
             <br>
         <% end %>
     <% end %>

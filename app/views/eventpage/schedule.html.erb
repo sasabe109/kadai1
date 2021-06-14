@@ -9,6 +9,23 @@
     <% end %>
     <br>
 
+    <div class= 'explain'>
+        <span class="join_event_color">
+            ■
+        </span>
+        ...参加中のイベント
+        &emsp;  &emsp;  &emsp;
+        <span class="absent_event_color">
+            ■
+        </span>
+        ...参加未予定のイベント
+        &emsp;  &emsp;  &emsp;
+        <span class="closed_event_color">
+            ■
+        </span>
+        ...終了したイベント
+    </div>
+
     <div class= 'calender'>
       <%= month_calendar events: event1 do |date, event| %>
            <%= date.day %>

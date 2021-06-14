@@ -11,19 +11,26 @@
 
     <!--　ログイン認証後なら　-->
     <% if user_signed_in? %>      
-    <% message="こんにちは#{current_user.name}さん。イベントの開催・参加・確認をしよう!" %>
-    <%= "................."+message %>
+        <% message="こんにちは#{current_user.name}さん。イベントの開催・参加・確認をしよう!" %>
+        <%= "................."+message %>
+        &ensp;
+        <%= link_to("スケジュール","/schedule") %>
+        &ensp;
+        <%= link_to("自分が参加中のイベント一覧","/myevent") %>
     <% else %>
-    <% message2="ログインしてイベントの開催・参加・確認をしよう!" %>
-    <%= "................."+message2 %>
-    <%= link_to("ログインはこちらから","/users/sign_in") %>
-    &ensp;                                                       <!--　&ensp は空白スペース　-->
-    <%= link_to("新規登録はこちらから","/users/sign_up") %>
+        <% message2="ログインしてイベントの開催・参加・確認をしよう!" %>
+        <%= "................."+message2 %>
+        <%= link_to("ログインはこちらから","/users/sign_in") %>
+        &ensp;                                                       <!--　&ensp は空白スペース　-->
+        <%= link_to("新規登録はこちらから","/users/sign_up") %>
     <% end %>
     &ensp;
-    <%= link_to("スケジュール","/schedule") %>
-    &ensp;
     <%= link_to("トップページ","/home/top") %>
+
+    <% if user_signed_in? %>
+    &ensp;
+    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+    <% end %>
 
   </head>
 

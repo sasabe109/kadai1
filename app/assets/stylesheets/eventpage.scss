@@ -6,7 +6,7 @@
     height: 150px;                  /* 高さ指定 */
     padding:  0px;                 /* 余白指定 */
     font-size: 15px;                /* 文字サイズ指定 */
-    background-color: #FFABCE;      /* 背景色指定 */
+    background-color: #dcdcdc;      /* 背景色指定 */
 }
 
 .join_event {
@@ -20,11 +20,26 @@
     height: 150px;                  /* 高さ指定 */
     padding:  0px;                 /* 余白指定 */
     font-size: 15px;                /* 文字サイズ指定 */
-    background-color:#AFEEEE;  /* 背景色指定 */
+    background-color: #ffc0cb;  /* 背景色指定 */
 }
 
 .datelist2{
-    padding-left:  300px;
-    
+    padding-left:  0px;
+    padding-bottom: 0px;
 }
 
+.explain{
+    padding-left:  600px;                 /* 余白指定 */
+}
+
+.join_event_color {
+    color:#7FFF00;  /* 背景色指定 */
+}
+
+.closed_event_color {
+    color: #dcdcdc;      /* 背景色指定 */
+}
+
+.absent_event_color{
+    color: #ffc0cb;  /* 背景色指定 */
+}

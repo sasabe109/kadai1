@@ -138,7 +138,7 @@ class EventpageController < ApplicationController
             @get_plan.datenum=i
             @get_plan.strdate=di1 
             @get_plan.status=di2 
-            @get_plan.save            #最後の２項で一意的なレコードが生成される
+            @get_plan.save            #最後の3項で一意的なレコードが生成される
             i +=1 
         end 
 
@@ -194,5 +194,11 @@ class EventpageController < ApplicationController
         redirect_to("/planning/result/#{params[:id]}")
 
     end 
+
+    def  close_match_day
+        
+
+    end
+
 
 end

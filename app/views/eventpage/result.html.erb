@@ -18,5 +18,5 @@
 <% end %>
 <br><br>
 <% if @event.presenter_id == current_user.id %>
-    <%= button_to("日程調整を締め切る","/close_match_day/#{@event.id}") %>
+    <%= button_to("日程調整を一旦締め切る","/close_match_day/#{@event.id}") %>
 <% end %> 
