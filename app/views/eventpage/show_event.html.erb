@@ -16,7 +16,7 @@
     <% if @event.date %>
        <%= @event.date.strftime("%Y年 %m月%d日 %H時%M分") %>
     <% else %>
-       <%= link_to("日程調整を行う","/planning/result/#{@event.id}") %>
+       <%= link_to("日程調整","/planning/result/#{@event.id}") %>
     <% end %>
 <% else %>
     このイベントは終了しました

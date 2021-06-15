@@ -5,9 +5,9 @@
 #  id           :integer          not null, primary key
 #  content      :text
 #  date         :datetime
+#  decide_flag  :integer
 #  flag         :integer
 #  title        :string
-#  type         :boolean
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  presenter_id :integer

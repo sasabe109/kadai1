@@ -1,10 +1,16 @@
 <p><font size="7"> イベントメンバー</font></p>
 <% if @memberlists.instance_of?(Array) %>
+    <ul>
     <% @memberlists.each do |m| %>
+        <li>
         <%= m.name %>
+        </li>
     <% end %>
+    </ul>
 <% elsif @memberlists.instance_of?(String) %>
+    <li>
     <%= @memberlists %>
+    </li>
 <% else %>
     <%= @memberlists.name %>
 <% end %>

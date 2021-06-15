@@ -65,7 +65,7 @@ class EventpageController < ApplicationController
         @memberlists=[],i=0
         if joins.size>=2
                 joins.each do |j|
-                    @memberlists[i]=Event.find_by(id:j.user_id)
+                    @memberlists[i]=User.find_by(id:j.user_id)
                     i+=1
                 end
         elsif joins.size==1
@@ -144,7 +144,7 @@ class EventpageController < ApplicationController
 
         j=0
         params[:datelist].each do | di1,di2 |
-            plan=Planning.find_by(event_id:event_key,datenum:j)
+            plan=Planning.find_by(event_id:event_key,user_id:current_user.id,datenum:j)
             if plan.status==1
                 @count=Count.find_by(event_id:event_key , datenum:j)
                 @count.user_count += 1
@@ -183,7 +183,7 @@ class EventpageController < ApplicationController
 
         j=0
         params[:datelist].each do | di1,di2 |
-            plan=Planning.find_by(event_id:params[:id],datenum:j)
+            plan=Planning.find_by(event_id:params[:id],user_id:current_user.id,datenum:j)
             if plan.status==1
                 @count=Count.find_by(event_id:params[:id] , datenum:j)
                 @count.user_count += 1
@@ -196,9 +196,17 @@ class EventpageController < ApplicationController
     end 
 
     def  close_match_day
-        
-
+        @event=Event.find_by(id:params[:id])
+        @event.decide_flag=1 
+        @event.save                        #type=nilなら日程調整期間、type=1なら日程調整期間終了
+        redirect_to("/show_event/#{@event.id}")
     end
 
+    def open_match_day
+        @event=Event.find_by(id:params[:id])
+        @event.decide_flag=nil                        #type=nilなら日程調整期間、type=1なら日程調整期間終了
+        @event.save
+        redirect_to("/show_event/#{@event.id}")
+    end
 
 end

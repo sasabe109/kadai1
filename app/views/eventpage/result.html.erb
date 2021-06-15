@@ -11,12 +11,23 @@
    <br>
    <% j+=1 %>
 <% end %>
-<% if @get_plans.empty? %>
-    <%= link_to("自分も回答する","/match_day/#{@event.id}") %>
+
+<% if @event.decide_flag.nil? %>
+    <% if @get_plans.empty? %>
+       <%= link_to("自分も回答する","/match_day/#{@event.id}") %>
+    <% else %>
+       <%= link_to("回答を修正する","/match_day/#{@event.id}") %>
+    <% end %>
 <% else %>
-    <%= link_to("回答を修正する","/match_day/#{@event.id}") %>
+    <% message="日程調整は現在、作成者によって締め切られています" %>
+    <%= message %>
 <% end %>
+
 <br><br>
 <% if @event.presenter_id == current_user.id %>
-    <%= button_to("日程調整を一旦締め切る","/close_match_day/#{@event.id}") %>
-<% end %> 
+    <% if @event.decide_flag.nil? %>
+       <%= button_to("日程調整を一旦締め切る","/close_match_day/#{@event.id}") %>
+    <% else %>
+       <%= button_to("日程調整を再開","/open_match_day/#{@event.id}") %>
+    <% end %>
+<% end %>

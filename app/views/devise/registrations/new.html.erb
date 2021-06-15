@@ -4,7 +4,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-        <%= f.label :name %> <em>(6 characters maximum)</em><br />
+        <%= f.label :name %> <em>(8 characters maximum)</em><br />
         <%= f.text_field :name, autofocus: true, maxlength: "8" %>
       </div>
 
@@ -28,7 +28,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "新規登録" %>
   </div>
 <% end %>
 

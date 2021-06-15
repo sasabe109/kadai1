@@ -10,6 +10,6 @@
     <%= @myevents %>
 <% else %>
     <% if @myevents.flag.nil? %> 
-        <%= link_to("#{@myevents[:title]}   +++++開催日時:#{@myevents[:date]}","/show_event/#{@myevents[:id]}") %>
+        <%= link_to("#{@myevents[:title]}","/show_event/#{@myevents[:id]}") %>
     <% end %>
 <% end %>  

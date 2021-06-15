@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_13_073018) do
+ActiveRecord::Schema.define(version: 2021_06_15_060957) do
 
   create_table "counts", force: :cascade do |t|
     t.integer "event_id"
@@ -23,12 +23,12 @@ ActiveRecord::Schema.define(version: 2021_06_13_073018) do
   create_table "events", force: :cascade do |t|
     t.string "title"
     t.datetime "date"
-    t.boolean "type"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "presenter_id"
     t.integer "flag"
+    t.integer "decide_flag"
   end
 
   create_table "joins", force: :cascade do |t|
